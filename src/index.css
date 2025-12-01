@@ -1,0 +1,171 @@
+/* Custom font imports */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Advanced Glitch Effect */
+@keyframes glitch {
+    0% {
+        transform: translate(0);
+    }
+
+    20% {
+        transform: translate(-2px, 2px);
+    }
+
+    40% {
+        transform: translate(-2px, -2px);
+    }
+
+    60% {
+        transform: translate(2px, 2px);
+    }
+
+    80% {
+        transform: translate(2px, -2px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+}
+
+.glitch {
+    position: relative;
+    animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.glitch::before,
+.glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+.glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #00f3ff;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #bc13fe;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip: rect(61px, 9999px, 90px, 0);
+    }
+
+    20% {
+        clip: rect(33px, 9999px, 61px, 0);
+    }
+
+    40% {
+        clip: rect(28px, 9999px, 2px, 0);
+    }
+
+    60% {
+        clip: rect(87px, 9999px, 35px, 0);
+    }
+
+    80% {
+        clip: rect(10px, 9999px, 98px, 0);
+    }
+
+    100% {
+        clip: rect(55px, 9999px, 23px, 0);
+    }
+}
+
+/* Gradient Animation */
+@keyframes gradient-x {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.animate-gradient-x {
+    background-size: 200% 200%;
+    animation: gradient-x 3s ease infinite;
+}
+
+/* Glass Text Effect */
+.glass-text {
+    text-shadow:
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(0, 243, 255, 0.3),
+        0 0 30px rgba(188, 19, 254, 0.2);
+}
+
+/* Custom Cursor */
+body {
+    cursor: none;
+}
+
+a,
+button,
+.magnetic {
+    cursor: none;
+}
+
+/* Holographic Effect */
+@keyframes holographic {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.holographic {
+    background: linear-gradient(45deg,
+            #00f3ff,
+            #bc13fe,
+            #00f3ff,
+            #bc13fe);
+    background-size: 300% 300%;
+    animation: holographic 5s ease infinite;
+}
+
+/* Neon Glow */
+.neon-glow {
+    box-shadow:
+        0 0 5px rgba(0, 243, 255, 0.5),
+        0 0 10px rgba(0, 243, 255, 0.4),
+        0 0 20px rgba(0, 243, 255, 0.3),
+        0 0 40px rgba(0, 243, 255, 0.2);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+    background: rgba(0, 243, 255, 0.3);
+    color: white;
+}
