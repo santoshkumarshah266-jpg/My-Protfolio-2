@@ -8,7 +8,7 @@ import GlassCard from './GlassCard';
  */
 const About = () => {
   // Profile image path - place your image in the public folder
-  const imageSrc = "/profile.jpg";
+  const imageSrc = `${import.meta.env.BASE_URL}profile.jpg`;
 
   return (
     <section id="about" className="relative py-32 px-4 z-10 max-w-7xl mx-auto">
