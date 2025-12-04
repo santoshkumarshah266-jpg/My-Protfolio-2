@@ -7,12 +7,18 @@ import { ChevronDown } from 'lucide-react';
  * With glitch effects, holographic text, and advanced animations
  */
 const Hero = () => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    
     const { scrollY } = useScroll();
-    const y = useTransform(scrollY, [0, 500], [0, 200]);
+    // Disable parallax on mobile for better performance
+    const y = useTransform(scrollY, [0, 500], [0, isMobile ? 0 : 200]);
     const opacity = useTransform(scrollY, [0, 300], [1, 0]);
     const [glitching, setGlitching] = useState(false);
 
     useEffect(() => {
+        // Disable glitch effect on mobile
+        if (isMobile) return;
+        
         // Random glitch effect
         const glitchInterval = setInterval(() => {
             setGlitching(true);
@@ -20,7 +26,7 @@ const Hero = () => {
         }, 5000);
 
         return () => clearInterval(glitchInterval);
-    }, []);
+    }, [isMobile]);
 
     return (
         <section id="hero" className="relative h-screen w-full flex flex-col items-center justify-center overflow-hidden z-10 px-4">
@@ -50,7 +56,7 @@ const Hero = () => {
                     <motion.span
                         className={`text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-purple-500 to-blue-600 animate-gradient-x relative inline-block ${glitching ? 'glitch' : ''}`}
                         data-text="SANTOSH"
-                        animate={{
+                        animate={isMobile ? {} : {
                             textShadow: [
                                 "0 0 10px rgba(0,243,255,0.5)",
                                 "0 0 30px rgba(0,243,255,1), 0 0 60px rgba(188,19,254,0.8)",

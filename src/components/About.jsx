@@ -150,28 +150,6 @@ const About = () => {
             >
               <Cpu size={24} />
             </motion.div>
-
-            {/* Orbiting Particles */}
-            {[...Array(3)].map((_, i) => (
-              <motion.div
-                key={i}
-                className="absolute w-2 h-2 bg-cyan-400 rounded-full"
-                style={{
-                  top: '50%',
-                  left: '50%',
-                }}
-                animate={{
-                  x: [0, Math.cos((i * 120 * Math.PI) / 180) * 150, 0],
-                  y: [0, Math.sin((i * 120 * Math.PI) / 180) * 150, 0],
-                }}
-                transition={{
-                  duration: 8,
-                  repeat: Infinity,
-                  ease: "linear",
-                  delay: i * 0.3,
-                }}
-              />
-            ))}
           </div>
         </motion.div>
 

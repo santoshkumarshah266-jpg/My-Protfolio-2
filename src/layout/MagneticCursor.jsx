@@ -11,6 +11,10 @@ const MagneticCursor = () => {
     const cursorDotRef = useRef(null);
 
     useEffect(() => {
+        // Disable on mobile/touch devices
+        const isMobile = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        if (isMobile) return;
+
         const cursor = cursorRef.current;
         const cursorDot = cursorDotRef.current;
 
@@ -103,6 +107,10 @@ const MagneticCursor = () => {
             });
         };
     }, []);
+
+    // Don't render on mobile
+    const isMobile = typeof window !== 'undefined' && ('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    if (isMobile) return null;
 
     return (
         <>

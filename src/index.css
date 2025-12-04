@@ -114,15 +114,26 @@
         0 0 30px rgba(188, 19, 254, 0.2);
 }
 
-/* Custom Cursor */
-body {
-    cursor: none;
-}
-
-a,
-button,
-.magnetic {
-    cursor: none;
+/* Mobile Performance Optimizations */
+@media (max-width: 767px) {
+    /* Disable expensive animations on mobile */
+    .glitch::before,
+    .glitch::after {
+        display: none;
+    }
+    
+    .glass-text {
+        text-shadow: none;
+    }
+    
+    .neon-glow {
+        box-shadow: 0 0 10px rgba(0, 243, 255, 0.3);
+    }
+    
+    /* Reduce animation complexity */
+    * {
+        animation-duration: 0.5s !important;
+    }
 }
 
 /* Holographic Effect */

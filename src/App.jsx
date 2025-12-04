@@ -1,6 +1,5 @@
 import React from 'react';
 import ParticleBackground from './layout/ParticleBackground';
-import MagneticCursor from './layout/MagneticCursor';
 import useWelcomeAudio from './hooks/useWelcomeAudio';
 
 // Sections
@@ -19,7 +18,6 @@ const App = () => {
 
   return (
     <div className="min-h-screen bg-[#050505] text-white overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200 font-sans">
-      <MagneticCursor />
       <ParticleBackground />
 
       {/* Main Content */}

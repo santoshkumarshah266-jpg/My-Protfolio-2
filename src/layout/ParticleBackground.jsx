@@ -15,9 +15,13 @@ const ParticleBackground = () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
 
+        // Detect mobile devices
+        const isMobile = window.innerWidth < 768;
+        
+        // Reduce particles and effects on mobile
         const particles = [];
-        const particleCount = 100;
-        let mouse = { x: null, y: null, radius: 150 };
+        const particleCount = isMobile ? 30 : 100; // 70% fewer particles on mobile
+        let mouse = { x: null, y: null, radius: isMobile ? 100 : 150 };
 
         class Particle {
             constructor() {
@@ -33,8 +37,8 @@ const ParticleBackground = () => {
                 this.x += this.speedX;
                 this.y += this.speedY;
 
-                // Mouse interaction
-                if (mouse.x && mouse.y) {
+                // Mouse interaction (disabled on mobile)
+                if (!isMobile && mouse.x && mouse.y) {
                     const dx = mouse.x - this.x;
                     const dy = mouse.y - this.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
@@ -65,8 +69,10 @@ const ParticleBackground = () => {
             particles.push(new Particle());
         }
 
-        // Connect particles
+        // Connect particles (skip on mobile for better performance)
         const connectParticles = () => {
+            if (isMobile) return; // Disable connections on mobile
+            
             for (let i = 0; i < particles.length; i++) {
                 for (let j = i + 1; j < particles.length; j++) {
                     const dx = particles[i].x - particles[j].x;
@@ -100,10 +106,12 @@ const ParticleBackground = () => {
 
         animate();
 
-        // Mouse move handler
+        // Mouse move handler (only on desktop)
         const handleMouseMove = (e) => {
-            mouse.x = e.x;
-            mouse.y = e.y;
+            if (!isMobile) {
+                mouse.x = e.x;
+                mouse.y = e.y;
+            }
         };
 
         const handleMouseLeave = () => {
@@ -117,13 +125,17 @@ const ParticleBackground = () => {
             canvas.height = window.innerHeight;
         };
 
-        window.addEventListener('mousemove', handleMouseMove);
-        window.addEventListener('mouseleave', handleMouseLeave);
+        if (!isMobile) {
+            window.addEventListener('mousemove', handleMouseMove);
+            window.addEventListener('mouseleave', handleMouseLeave);
+        }
         window.addEventListener('resize', handleResize);
 
         return () => {
-            window.removeEventListener('mousemove', handleMouseMove);
-            window.removeEventListener('mouseleave', handleMouseLeave);
+            if (!isMobile) {
+                window.removeEventListener('mousemove', handleMouseMove);
+                window.removeEventListener('mouseleave', handleMouseLeave);
+            }
             window.removeEventListener('resize', handleResize);
         };
     }, []);
